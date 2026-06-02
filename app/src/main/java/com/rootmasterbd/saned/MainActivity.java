@@ -7,83 +7,53 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.*;
 import android.widget.*;
-import java.util.*;
 import java.util.concurrent.*;
 
 public class MainActivity extends Activity {
     private TextView tvMode, navHome, navApps, navTweaks, navSettings;
     private FrameLayout pageContainer;
-    private Handler handler = new Handler(Looper.getMainLooper());
-    private ExecutorService exec = Executors.newFixedThreadPool(2);
-    private int currentPage = 0;
+    public Handler handler = new Handler(Looper.getMainLooper());
+    public ExecutorService exec = Executors.newFixedThreadPool(3);
     private HomeFragment homeFrag;
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         setContentView(R.layout.activity_main);
-
         tvMode = findViewById(R.id.tvMode);
         pageContainer = findViewById(R.id.pageContainer);
         navHome = findViewById(R.id.navHome);
         navApps = findViewById(R.id.navApps);
         navTweaks = findViewById(R.id.navTweaks);
         navSettings = findViewById(R.id.navSettings);
-
         navHome.setOnClickListener(v -> showPage(0));
         navApps.setOnClickListener(v -> showPage(1));
         navTweaks.setOnClickListener(v -> showPage(2));
         navSettings.setOnClickListener(v -> showPage(3));
-
         showPage(0);
-        startModeUpdate();
     }
 
-    private void showPage(int page) {
-        currentPage = page;
-        navHome.setTextColor(Color.parseColor(page==0?"#00B4FF":"#6080A0"));
-        navApps.setTextColor(Color.parseColor(page==1?"#00B4FF":"#6080A0"));
-        navTweaks.setTextColor(Color.parseColor(page==2?"#00B4FF":"#6080A0"));
-        navSettings.setTextColor(Color.parseColor(page==3?"#00B4FF":"#6080A0"));
-
+    void showPage(int p) {
+        int[] colors = {p==0?0xFF00B4FF:0xFF6080A0, p==1?0xFF00B4FF:0xFF6080A0, p==2?0xFF00B4FF:0xFF6080A0, p==3?0xFF00B4FF:0xFF6080A0};
+        navHome.setTextColor(colors[0]); navApps.setTextColor(colors[1]);
+        navTweaks.setTextColor(colors[2]); navSettings.setTextColor(colors[3]);
         pageContainer.removeAllViews();
+        if(homeFrag != null) homeFrag.stop();
         LayoutInflater inf = LayoutInflater.from(this);
-        switch(page) {
+        switch(p) {
             case 0:
-                View homeView = inf.inflate(R.layout.fragment_home, pageContainer, false);
-                homeFrag = new HomeFragment(homeView, handler, exec, tvMode);
-                pageContainer.addView(homeView);
-                break;
+                View hv = inf.inflate(R.layout.fragment_home, pageContainer, false);
+                homeFrag = new HomeFragment(hv, handler, exec, tvMode);
+                pageContainer.addView(hv); break;
             case 1:
-                pageContainer.addView(new AppsPage(this, exec, handler));
-                break;
+                pageContainer.addView(new AppsPage(this, exec, handler)); break;
             case 2:
-                View tweaksView = inf.inflate(R.layout.fragment_tweaks, pageContainer, false);
-                new TweaksPage(tweaksView, exec, handler);
-                pageContainer.addView(tweaksView);
-                break;
+                View tv = inf.inflate(R.layout.fragment_tweaks, pageContainer, false);
+                new TweaksPage(tv, exec, handler); pageContainer.addView(tv); break;
             case 3:
-                View settingsView = inf.inflate(R.layout.fragment_settings, pageContainer, false);
-                new SettingsPage(this, settingsView, exec, handler);
-                pageContainer.addView(settingsView);
-                break;
+                View sv = inf.inflate(R.layout.fragment_settings, pageContainer, false);
+                new SettingsPage(this, sv, exec, handler); pageContainer.addView(sv); break;
         }
-    }
-
-    private void startModeUpdate() {
-        Runnable r = new Runnable() {
-            public void run() {
-                exec.execute(() -> {
-                    String mode = RootUtils.getMode();
-                    handler.post(() -> {
-                        tvMode.setText("[" + mode.toUpperCase() + "]");
-                        tvMode.setTextColor(Color.parseColor("active".equals(mode)||"gaming".equals(mode)?"#00FF88":"#FFD700"));
-                    });
-                });
-                handler.postDelayed(this, 2000);
-            }
-        };
-        handler.post(r);
     }
 
     @Override protected void onDestroy() { super.onDestroy(); exec.shutdown(); }
