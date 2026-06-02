@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/bg">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="12dp">
+
+        <!-- MODE BUTTONS -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="8dp">
+            <Button android:id="@+id/btnBalanced" android:layout_width="0dp"
+                android:layout_height="44dp" android:layout_weight="1" android:layout_marginEnd="4dp"
+                android:text="BALANCED" android:textSize="11sp" android:textStyle="bold"/>
+            <Button android:id="@+id/btnPerformance" android:layout_width="0dp"
+                android:layout_height="44dp" android:layout_weight="1" android:layout_marginEnd="4dp"
+                android:text="PERFORMANCE" android:textSize="11sp" android:textStyle="bold"/>
+            <Button android:id="@+id/btnGaming" android:layout_width="0dp"
+                android:layout_height="44dp" android:layout_weight="1"
+                android:text="GAMING" android:textSize="11sp" android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- PERF CARD -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/card" android:padding="12dp"
+            android:orientation="vertical" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="PERFORMANCE" android:textColor="@color/sub" android:textSize="10sp"/>
+            <TextView android:id="@+id/tvOryon" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Oryon: ---"
+                android:textColor="@color/yellow" android:textSize="16sp" android:textStyle="bold"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="4dp">
+                <TextView android:id="@+id/tvCpu" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="CPU: ---" android:textColor="@color/text" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvGpu" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="GPU: ---" android:textColor="@color/text" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="2dp">
+                <TextView android:id="@+id/tvHz" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="---Hz" android:textColor="@color/text" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvFps" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="FPS: ---" android:textColor="@color/text" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- APPS CARD -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/card" android:padding="12dp"
+            android:orientation="vertical" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="TARGET APPS" android:textColor="@color/sub" android:textSize="10sp"/>
+            <TextView android:id="@+id/tvJahez" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Jahez: ---"
+                android:textColor="@color/text" android:textSize="13sp" android:layout_marginTop="4dp"/>
+            <TextView android:id="@+id/tvSaned" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Saned: ---"
+                android:textColor="@color/text" android:textSize="13sp"/>
+            <TextView android:id="@+id/tvMaps" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Maps: ---"
+                android:textColor="@color/text" android:textSize="13sp"/>
+        </LinearLayout>
+
+        <!-- NETWORK CARD -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/card" android:padding="12dp"
+            android:orientation="vertical" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="NETWORK" android:textColor="@color/sub" android:textSize="10sp"/>
+            <TextView android:id="@+id/tvNetMs" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Net MS: ---"
+                android:textColor="@color/text" android:textSize="13sp" android:layout_marginTop="4dp"/>
+            <TextView android:id="@+id/tvJahezMs" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:text="Jahez MS: ---"
+                android:textColor="@color/text" android:textSize="14sp" android:textStyle="bold"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="4dp">
+                <TextView android:id="@+id/tvDl" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="Down: ---" android:textColor="@color/green" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvUl" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="Up: ---" android:textColor="@color/blue" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- STATUS CARD -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/card" android:padding="12dp"
+            android:orientation="vertical" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="PROTECTION" android:textColor="@color/sub" android:textSize="10sp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="4dp">
+                <TextView android:id="@+id/tvWakelock" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="Wakelock: ---" android:textColor="@color/text" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvGps" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="GPS: ---" android:textColor="@color/text" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="2dp">
+                <TextView android:id="@+id/tvKa" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="KA: ---" android:textColor="@color/text" android:textSize="12sp"/>
+                <TextView android:id="@+id/tvBg" android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:text="BG: ---" android:textColor="@color/text" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- LOG -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="LIVE LOG" android:textColor="@color/sub" android:textSize="10sp"
+            android:layout_marginBottom="4dp"/>
+        <TextView android:id="@+id/tvLog" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="@color/card"
+            android:padding="8dp" android:text="Starting..." android:textColor="@color/green"
+            android:textSize="11sp" android:minHeight="80dp"/>
+    </LinearLayout>
+</ScrollView>

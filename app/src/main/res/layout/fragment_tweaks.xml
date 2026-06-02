@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/bg">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="12dp">
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/card" android:padding="12dp"
+            android:orientation="vertical" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="PERFORMANCE TWEAKS" android:textColor="@color/orange"
+                android:textSize="11sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="CPU Max Lock" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/swCpuMax" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="GPU Max Lock" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/swGpuMax" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="Force 144Hz" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/sw144hz" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="Thermal Threshold 95°C" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/swThermal" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:background="@color/card" android:padding="12dp"
+            android:orientation="vertical" android:layout_marginBottom="6dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="NETWORK TWEAKS" android:textColor="@color/blue"
+                android:textSize="11sp" android:textStyle="bold" android:layout_marginBottom="8dp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="TCP BBR + Low Latency" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/swNetwork" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="DNS 1.1.1.1" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/swDns" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="CPU Wakelock" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/swWakelock" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="48dp" android:gravity="center_vertical">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="GPS High Accuracy" android:textColor="@color/text" android:textSize="13sp"/>
+                <Switch android:id="@+id/swGps" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView android:id="@+id/tvTweakStatus" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text=""
+            android:textColor="@color/green" android:textSize="12sp" android:layout_marginBottom="4dp"/>
+        <Button android:id="@+id/btnApplyTweaks" android:layout_width="match_parent"
+            android:layout_height="48dp" android:text="APPLY ALL TWEAKS"
+            android:textColor="#000000" android:textStyle="bold"/>
+    </LinearLayout>
+</ScrollView>

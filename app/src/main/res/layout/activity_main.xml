@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/bg">
+
+    <!-- TOP BAR -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp"
+        android:background="@color/header" android:gravity="center_vertical"
+        android:paddingStart="16dp" android:paddingEnd="16dp">
+        <TextView android:id="@+id/tvAppTitle" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:text="RootmasterBD Saned" android:textColor="@color/blue"
+            android:textSize="17sp" android:textStyle="bold"/>
+        <TextView android:id="@+id/tvMode" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="[BALANCED]"
+            android:textColor="@color/green" android:textSize="13sp" android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- PAGE CONTAINER -->
+    <FrameLayout android:id="@+id/pageContainer"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- BOTTOM NAV -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="52dp"
+        android:background="@color/header" android:orientation="horizontal">
+        <TextView android:id="@+id/navHome" android:layout_width="0dp"
+            android:layout_height="match_parent" android:layout_weight="1"
+            android:text="Home" android:gravity="center" android:textColor="@color/blue"
+            android:textSize="12sp" android:background="?android:selectableItemBackground"/>
+        <TextView android:id="@+id/navApps" android:layout_width="0dp"
+            android:layout_height="match_parent" android:layout_weight="1"
+            android:text="Apps" android:gravity="center" android:textColor="@color/sub"
+            android:textSize="12sp" android:background="?android:selectableItemBackground"/>
+        <TextView android:id="@+id/navTweaks" android:layout_width="0dp"
+            android:layout_height="match_parent" android:layout_weight="1"
+            android:text="Tweaks" android:gravity="center" android:textColor="@color/sub"
+            android:textSize="12sp" android:background="?android:selectableItemBackground"/>
+        <TextView android:id="@+id/navSettings" android:layout_width="0dp"
+            android:layout_height="match_parent" android:layout_weight="1"
+            android:text="Settings" android:gravity="center" android:textColor="@color/sub"
+            android:textSize="12sp" android:background="?android:selectableItemBackground"/>
+    </LinearLayout>
+</LinearLayout>
