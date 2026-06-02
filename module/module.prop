@@ -1,0 +1,8 @@
+id=rootmasterbd_saned
+name=RootmasterBD Saned
+version=v1.0.0 (v40)
+versionCode=10022
+author=ROOTMASTERBD
+description=RootmasterBD Saned - Performance Optimizer for Jahez & Saned | Red Magic 11 Pro | Android 16
+minApi=29
+maxApi=36

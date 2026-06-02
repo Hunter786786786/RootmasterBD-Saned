@@ -1,0 +1,37 @@
+name: Build RootmasterBD Saned
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: temurin
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v3
+      - name: Generate Gradle wrapper
+        run: gradle wrapper --gradle-version 8.5
+      - name: Build APK
+        run: ./gradlew assembleDebug
+      - name: Bundle into module zip
+        run: |
+          mkdir -p module
+          cp -r module_src/. module/ 2>/dev/null || true
+          cp app/build/outputs/apk/debug/app-debug.apk module/RootmasterBD_Saned.apk
+          cd module && zip -r ../RootmasterBD_Saned_Module.zip . && cd ..
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RootmasterBD-Saned-Module
+          path: RootmasterBD_Saned_Module.zip
+      - uses: softprops/action-gh-release@v2
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: RootmasterBD Saned v1.0.${{ github.run_number }}
+          files: RootmasterBD_Saned_Module.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

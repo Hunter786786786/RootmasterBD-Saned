@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#050A0F">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp"
+        android:background="#0A1628" android:gravity="center_vertical" android:paddingStart="16dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Settings" android:textColor="#00B4FF" android:textSize="16sp" android:textStyle="bold"/>
+    </LinearLayout>
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:layout_marginTop="8dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:paddingStart="12dp" android:paddingEnd="12dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:background="#080E18" android:padding="12dp" android:orientation="vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="AUTO SETTINGS" android:textColor="#4070A0" android:textSize="10sp"/>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="48dp"
+                    android:gravity="center_vertical" android:layout_marginTop="8dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="Auto Mode Switch" android:textColor="#D0E8FF" android:textSize="13sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="Switch mode when app opens" android:textColor="#405060" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <Switch android:id="@+id/swAutoSwitch" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Default Mode when app opens:" android:textColor="#90B8D8" android:textSize="12sp" android:layout_marginTop="8dp"/>
+                <Spinner android:id="@+id/spDefaultMode" android:layout_width="match_parent" android:layout_height="44dp" android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:background="#080E18" android:padding="12dp" android:orientation="vertical" android:layout_marginBottom="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="BACKGROUND APP KILLER" android:textColor="#4070A0" android:textSize="10sp"/>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="48dp"
+                    android:gravity="center_vertical" android:layout_marginTop="8dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="All App Kill Mode" android:textColor="#D0E8FF" android:textSize="13sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="Kill all except whitelisted apps" android:textColor="#405060" android:textSize="11sp"/>
+                    </LinearLayout>
+                    <Switch android:id="@+id/swAllAppKill" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Whitelist (space-separated packages):" android:textColor="#90B8D8" android:textSize="12sp" android:layout_marginTop="8dp"/>
+                <EditText android:id="@+id/etKillWhitelist" android:layout_width="match_parent" android:layout_height="80dp"
+                    android:background="#0A1628" android:textColor="#D0E8FF" android:textSize="11sp"
+                    android:padding="8dp" android:gravity="top" android:inputType="textMultiLine" android:layout_marginTop="4dp"/>
+
+                <Button android:id="@+id/btnKillNow" android:layout_width="match_parent" android:layout_height="44dp"
+                    android:layout_marginTop="8dp" android:text="KILL BACKGROUND APPS NOW"
+                    android:textColor="#000000" android:background="#FF4060" android:textStyle="bold" android:textSize="12sp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView android:id="@+id/tvSettingsStatus" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="" android:textColor="#00FF88" android:textSize="12sp" android:paddingStart="12dp" android:paddingTop="4dp"/>
+    <Button android:id="@+id/btnSaveSettings" android:layout_width="match_parent" android:layout_height="48dp"
+        android:layout_marginStart="12dp" android:layout_marginEnd="12dp" android:layout_marginBottom="8dp" android:layout_marginTop="4dp"
+        android:text="SAVE SETTINGS" android:textColor="#000000" android:background="#00FF88" android:textStyle="bold"/>
+</LinearLayout>
