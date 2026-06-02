@@ -13,44 +13,47 @@ jobs:
           java-version: '17'
           distribution: temurin
 
-      - name: Install Android SDK & Build Tools
+      - name: Build APK
         run: |
-          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          # Install Android SDK
+          export ANDROID_HOME=$HOME/android-sdk
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          unzip -q commandlinetools-linux-11076708_latest.zip -d $ANDROID_HOME/cmdline-tools
+          mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+          yes | sdkmanager --licenses > /dev/null 2>&1
           sdkmanager "platforms;android-34" "build-tools;34.0.0" > /dev/null 2>&1
 
-      - name: Setup Gradle
-        run: |
+          # Install Gradle
           wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip
           unzip -q gradle-8.5-bin.zip
           export PATH=$PWD/gradle-8.5/bin:$PATH
-          echo "$PWD/gradle-8.5/bin" >> $GITHUB_PATH
-          gradle wrapper --gradle-version 8.5
 
-      - name: Build APK
-        run: |
-          export ANDROID_HOME=$ANDROID_SDK_ROOT
+          # Generate wrapper
+          gradle wrapper
+
+          # Build
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          ./gradlew assembleDebug --no-daemon
 
-      - name: Bundle module zip
+      - name: Package module
         run: |
-          mkdir -p module_out
-          [ -d "module" ] && cp -r module/. module_out/
-          APK=$(find . -name "app-debug.apk" 2>/dev/null | head -1)
-          [ -n "$APK" ] && cp "$APK" module_out/RootmasterBD_Saned.apk || echo "APK not found"
-          cd module_out && zip -r ../RootmasterBD_Saned_Module.zip . && cd ..
+          mkdir -p out
+          [ -d module ] && cp -r module/. out/
+          find . -name "app-debug.apk" -exec cp {} out/RootmasterBD_Saned.apk \;
+          cd out && zip -r ../RootmasterBD_Saned_Module.zip . && cd ..
 
       - uses: actions/upload-artifact@v4
         with:
           name: RootmasterBD-Saned-Module
           path: RootmasterBD_Saned_Module.zip
 
-      - name: Create Release
+      - name: Release
         if: github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.${{ github.run_number }}
-          name: RootmasterBD Saned v1.0.${{ github.run_number }}
+          tag_name: v1.${{ github.run_number }}
           files: RootmasterBD_Saned_Module.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
