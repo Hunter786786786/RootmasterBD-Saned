@@ -13,31 +13,31 @@ jobs:
           java-version: '17'
           distribution: temurin
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Install Android SDK & Build Tools
+        run: |
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          sdkmanager "platforms;android-34" "build-tools;34.0.0" > /dev/null 2>&1
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.5'
-
-      - name: Make gradlew executable
         run: |
-          cat > gradlew << 'GWEOF'
-          #!/bin/sh
-          exec gradle "$@"
-          GWEOF
+          wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip
+          unzip -q gradle-8.5-bin.zip
+          export PATH=$PWD/gradle-8.5/bin:$PATH
+          echo "$PWD/gradle-8.5/bin" >> $GITHUB_PATH
+          gradle wrapper --gradle-version 8.5
+
+      - name: Build APK
+        run: |
+          export ANDROID_HOME=$ANDROID_SDK_ROOT
           chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
 
-      - name: Build Debug APK
-        run: gradle assembleDebug
-
-      - name: Bundle into module zip
+      - name: Bundle module zip
         run: |
           mkdir -p module_out
-          cp -r module/. module_out/ 2>/dev/null || mkdir -p module_out
-          APK=$(find . -name "app-debug.apk" | head -1)
-          [ -n "$APK" ] && cp "$APK" module_out/RootmasterBD_Saned.apk
+          [ -d "module" ] && cp -r module/. module_out/
+          APK=$(find . -name "app-debug.apk" 2>/dev/null | head -1)
+          [ -n "$APK" ] && cp "$APK" module_out/RootmasterBD_Saned.apk || echo "APK not found"
           cd module_out && zip -r ../RootmasterBD_Saned_Module.zip . && cd ..
 
       - uses: actions/upload-artifact@v4
@@ -45,8 +45,9 @@ jobs:
           name: RootmasterBD-Saned-Module
           path: RootmasterBD_Saned_Module.zip
 
-      - uses: softprops/action-gh-release@v2
+      - name: Create Release
         if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.${{ github.run_number }}
           name: RootmasterBD Saned v1.0.${{ github.run_number }}

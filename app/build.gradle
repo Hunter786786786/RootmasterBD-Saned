@@ -5,22 +5,18 @@ plugins {
 android {
     namespace 'com.rootmasterbd.saned'
     compileSdk 34
-
     defaultConfig {
         applicationId "com.rootmasterbd.saned"
         minSdk 29
         targetSdk 34
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0"
     }
-
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
