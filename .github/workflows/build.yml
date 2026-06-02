@@ -7,26 +7,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: temurin
-      - uses: android-actions/setup-android@v3
-      - uses: gradle/actions/setup-gradle@v3
-      - name: Generate Gradle wrapper
-        run: gradle wrapper --gradle-version 8.5
-      - name: Build APK
-        run: ./gradlew assembleDebug
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.5'
+
+      - name: Make gradlew executable
+        run: |
+          cat > gradlew << 'GWEOF'
+          #!/bin/sh
+          exec gradle "$@"
+          GWEOF
+          chmod +x gradlew
+
+      - name: Build Debug APK
+        run: gradle assembleDebug
+
       - name: Bundle into module zip
         run: |
-          mkdir -p module
-          cp -r module_src/. module/ 2>/dev/null || true
-          cp app/build/outputs/apk/debug/app-debug.apk module/RootmasterBD_Saned.apk
-          cd module && zip -r ../RootmasterBD_Saned_Module.zip . && cd ..
+          mkdir -p module_out
+          cp -r module/. module_out/ 2>/dev/null || mkdir -p module_out
+          APK=$(find . -name "app-debug.apk" | head -1)
+          [ -n "$APK" ] && cp "$APK" module_out/RootmasterBD_Saned.apk
+          cd module_out && zip -r ../RootmasterBD_Saned_Module.zip . && cd ..
+
       - uses: actions/upload-artifact@v4
         with:
           name: RootmasterBD-Saned-Module
           path: RootmasterBD_Saned_Module.zip
+
       - uses: softprops/action-gh-release@v2
         if: github.event_name == 'workflow_dispatch'
         with:
